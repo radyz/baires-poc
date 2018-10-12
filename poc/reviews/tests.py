@@ -6,6 +6,8 @@ import pytest
 from faker import Faker
 from rest_framework import status
 
+from reviews.factories import ReviewFactory
+
 
 fake = Faker()
 
@@ -88,3 +90,18 @@ def test_review_create(
     response = admin_api_client.post(
         reverse('v1:reviews-list'), data, REMOTE_ADDR=ip_address)
     assert response.status_code == status.HTTP_201_CREATED
+
+
+@pytest.mark.django_db
+def test_review_not_visible_to_reviewer_only(admin_api_client, admin_user):
+    external_review = ReviewFactory()
+    user_review = ReviewFactory(reviewer=admin_user)
+
+    external_review_response = admin_api_client.get(
+        reverse('v1:reviews-detail', kwargs={'pk': external_review.pk}))
+
+    user_review_response = admin_api_client.get(
+        reverse('v1:reviews-detail', kwargs={'pk': user_review.pk}))
+
+    assert external_review_response.status_code == status.HTTP_404_NOT_FOUND
+    assert user_review_response.status_code == status.HTTP_200_OK
