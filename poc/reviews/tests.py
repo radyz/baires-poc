@@ -67,8 +67,14 @@ def test_route_is_unauthorized_for_anonymous(
         marks=pytest.mark.xfail(reason='invalid', raises=AssertionError)),
     fake.company()
 ])
+@pytest.mark.parametrize('ip_address', [
+    pytest.param(
+        'DummyIpAddress',
+        marks=pytest.mark.xfail(reason='required', raises=AssertionError)),
+    '127.0.0.1'
+])
 def test_review_create(
-    admin_api_client, rating, title, summary, company
+    admin_api_client, rating, title, summary, company, ip_address
 ):
     data = {
         'rating': rating,
@@ -79,20 +85,6 @@ def test_review_create(
         }
     }
 
-    response = admin_api_client.post(reverse('v1:reviews-list'), data)
-    assert response.status_code == status.HTTP_201_CREATED
-
-
-@pytest.mark.django_db
-def test_review_create_ip_address(admin_api_client, settings):
-    data = {
-        'rating': 1,
-        'title': fake.word(),
-        'summary': fake.sentence(),
-        'company': {'name': fake.company()}
-    }
-
     response = admin_api_client.post(
-        reverse('v1:reviews-list'), data, REMOTE_ADDR="DummyIpAddress")
-
-    assert response.status_code == status.HTTP_400_BAD_REQUEST
+        reverse('v1:reviews-list'), data, REMOTE_ADDR=ip_address)
+    assert response.status_code == status.HTTP_201_CREATED
