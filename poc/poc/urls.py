@@ -23,7 +23,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^docs/', include_docs_urls(title='My API title', public=False)),
+    url(r'^docs/', include_docs_urls(title='Exercise API', public=False)),
     url(r'^token/$', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    url(r'^api/', include('reviews.urls', namespace='v1'))
+    url(r'^v1/', include('reviews.urls', namespace='v1'))
 ]

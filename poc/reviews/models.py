@@ -6,7 +6,8 @@ from django.utils.translation import gettext as _
 class Company(models.Model):
     name = models.CharField(
         max_length=255,
-        verbose_name=_('Name')
+        verbose_name=_('Name'),
+        help_text=_('Should not exceed 255 characters')
     )
 
     class Meta:
@@ -24,16 +25,19 @@ class Review(models.Model):
             (5, _('Five')),
         ),
         verbose_name=_('Rating'),
+        help_text=_('Scale from 1 to 5')
     )
 
     title = models.CharField(
         max_length=64,
-        verbose_name=_('Title')
+        verbose_name=_('Title'),
+        help_text=_('Should not exceed 64 characters')
     )
 
     summary = models.TextField(
         max_length=10000,
-        verbose_name=_('Summary')
+        verbose_name=_('Summary'),
+        help_text=_('Should not exceed 10k characters')
     )
 
     ip_address = models.GenericIPAddressField(
