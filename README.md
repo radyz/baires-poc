@@ -5,29 +5,19 @@
 
 ## Features
 
-|-------------------------------------------------------------------------------+-------------|
-| Feature                                                                       | Implemented |
-|-------------------------------------------------------------------------------+-------------|
-| Users are able to submit reviews to the API                                   | x           |
-|-------------------------------------------------------------------------------+-------------|
-| Users are able to retrieve reviews that they submitted                        | x           |
-|-------------------------------------------------------------------------------+-------------|
-| Users cannot see reviews submitted by other users                             | x           |
-|-------------------------------------------------------------------------------+-------------|
-| Use of the API requires a unique auth token for each user                     | x           |
-|-------------------------------------------------------------------------------+-------------|
-| Reviews must include:                                                         | x           |
-| Rating between 1 - 5                                                          |             |
-| Title - no more than 64 chars                                                 |             |
-| Summary - no more than 10k chars                                              |             |
-| IP Address - IP of the review submitter                                       |             |
-| Submission date - the date the review was submitted                           |             |
-| Company                                                                       |             |
-| Reviewer Metadata                                                             |             |
-| Unit tests must be included providing 100% code coverage                      |             |
-|-------------------------------------------------------------------------------+-------------|
-| Provide an authenticated admin view that allows me to view review submissions | x           |
-|-------------------------------------------------------------------------------+-------------|
+* Users are able to submit reviews to the API
+* Users are able to retrieve reviews that they submitted
+* Users cannot see reviews submitted by other users
+* Use of the API requires a unique auth token for each user
+* Review Rating between 1 - 5
+* Review Title - no more than 64 chars
+* Review Summary - no more than 10k chars
+* Review IP Address - IP of the review submitter
+* Review Submission date - the date the review was submitted
+* Review Company
+* Reviewer Metadata
+* Unit tests must be included providing 100% code coverage
+* Provide an authenticated admin view that allows me to view review submissions
 
 ## Installation
 All commands are assumed to be run from within your shell and in a python
