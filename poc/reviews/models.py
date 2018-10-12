@@ -51,10 +51,10 @@ class Review(models.Model):
         on_delete=models.PROTECT
     )
 
-    author = models.ForeignKey(
+    reviewer = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='reviews',
-        verbose_name=_('Author'),
+        verbose_name=_('Reviewer'),
         on_delete=models.PROTECT
     )
 
