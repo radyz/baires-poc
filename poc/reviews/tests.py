@@ -81,3 +81,18 @@ def test_review_create(
 
     response = admin_api_client.post(reverse('v1:reviews-list'), data)
     assert response.status_code == status.HTTP_201_CREATED
+
+
+@pytest.mark.django_db
+def test_review_create_ip_address(admin_api_client, settings):
+    data = {
+        'rating': 1,
+        'title': fake.word(),
+        'summary': fake.sentence(),
+        'company': {'name': fake.company()}
+    }
+
+    response = admin_api_client.post(
+        reverse('v1:reviews-list'), data, REMOTE_ADDR="DummyIpAddress")
+
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
