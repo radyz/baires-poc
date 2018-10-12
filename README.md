@@ -1,30 +1,86 @@
-Instrucciones
-Backend Practical
+# Exercise API
 
-Using Django, create a simple API that allows users to post and retrieve their reviews.
+## Requirements
+* Python 3.5+. A great tool to handle different environments and versions [venv](https://virtualenv.pypa.io/en/stable/)
 
-Acceptance Criteria
+## Features
 
-The completed assignment must be hosted in a git repository
-The repository must include commit history (e.g., more than one commit)
-Users are able to submit reviews to the API
-Users are able to retrieve reviews that they submitted
-Users cannot see reviews submitted by other users
-Use of the API requires a unique auth token for each user
-Submitted reviews must include, at least, the following attributes:
-Rating - must be between 1 - 5
-Title - no more than 64 chars
-Summary - no more than 10k chars
-IP Address - IP of the review submitter
-Submission date - the date the review was submitted
-Company - information about the company for which the review was submitted, can be simple text (e.g., name, company id, etc.) or a separate model altogether
-Reviewer Metadata - information about the reviewer, can be simple text (e.g., name, email, reviewer id, etc.) or a separate model altogether
-Unit tests must be included providing 100% code coverage
-Include instructions on local setup details for both “app setup” and “data setup”
+|-------------------------------------------------------------------------------+-------------|
+| Feature                                                                       | Implemented |
+|-------------------------------------------------------------------------------+-------------|
+| Users are able to submit reviews to the API                                   | x           |
+|-------------------------------------------------------------------------------+-------------|
+| Users are able to retrieve reviews that they submitted                        | x           |
+|-------------------------------------------------------------------------------+-------------|
+| Users cannot see reviews submitted by other users                             | x           |
+|-------------------------------------------------------------------------------+-------------|
+| Use of the API requires a unique auth token for each user                     | x           |
+|-------------------------------------------------------------------------------+-------------|
+| Reviews must include:                                                         | x           |
+| Rating between 1 - 5                                                          |             |
+| Title - no more than 64 chars                                                 |             |
+| Summary - no more than 10k chars                                              |             |
+| IP Address - IP of the review submitter                                       |             |
+| Submission date - the date the review was submitted                           |             |
+| Company                                                                       |             |
+| Reviewer Metadata                                                             |             |
+| Unit tests must be included providing 100% code coverage                      |             |
+|-------------------------------------------------------------------------------+-------------|
+| Provide an authenticated admin view that allows me to view review submissions | x           |
+|-------------------------------------------------------------------------------+-------------|
 
-Optional: 
+## Installation
+All commands are assumed to be run from within your shell and in a python
+compatible version
 
-Provide an authenticated admin view that allows me to view review submissions
-Document the API
+### Install dependencies
+```sh
+> pip install -r requirements.txt
+```
 
-Organize the schema and data models in whatever manner you think makes the most sense and feel free to add any additional style and flair to the project that you'd like.
+### Setup Django
+Within the top level `poc` folder execute the following commands to setup
+django's db (sqlite) and create the initial admin user
+```sh
+> ./manage.py migrate
+> ./manage.py createsuperuser
+```
+
+### Run application
+```sh
+> ./manage.py runserver 0.0.0.0:8000
+```
+
+
+## Development
+
+### Api docs
+Documentation is located at `http://<hostname>:8000/docs` where an interactive
+client is available for adhoc tests of services.
+
+All available endpoints are listed. Note that in order to view authenticated
+endpoints the user has to also be authenticated (there's an option to login
+within the same UI)
+
+
+### Tests
+Although Django offers an excellent test suite, this project has opted for
+`pytest` which offers more flexibility while integrating with Django
+
+In order to run all tests execute the following command from within the top
+level `poc` folder
+```sh
+> pytest
+```
+
+## Usage
+Assumes the application is running at port `8000`
+
+### Admin Dashboard
+Navigate to `http://<hostname>:8000/admin` to authenticate and access the main
+dashboard. From there you can view all reviews created
+
+### Api
+Navigate to `http://<hostname>:8000/v1/reviews/review` to authenticate and
+access your reviews. Due note that from the API access is restricted to reviews
+created by the same user.
