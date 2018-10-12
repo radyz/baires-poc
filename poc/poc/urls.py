@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url
+from django.conf.urls import url, include
 
+from rest_framework.documentation import include_docs_urls
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url('^token/$', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    url(r'^docs/', include_docs_urls(title='My API title', public=False)),
+    url(r'^token/$', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    url(r'^api/', include('reviews.urls', namespace='v1'))
 ]

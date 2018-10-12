@@ -13,6 +13,5 @@ pytest==3.8.2
 pytest-cov==2.6.0
 pytest-django==3.4.3
 pytest-env==0.6.2
-pytest-factoryboy==2.0.1
 pytest-lazy-fixture==0.4.2
 pytest-mock==1.10.0
