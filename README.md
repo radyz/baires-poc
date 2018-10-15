@@ -60,7 +60,7 @@ Although Django offers an excellent test suite, this project has opted for
 In order to run all tests execute the following command from within the top
 level `poc` folder
 ```sh
-> pytest
+> pytest --cov=.
 ```
 
 ## Usage
